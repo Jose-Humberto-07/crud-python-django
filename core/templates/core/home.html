@@ -22,6 +22,7 @@
                       <th scope="col">Name</th>
                       <th scope="col">Roll</th>
                       <th scope="col">City</th>
+                      <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,13 @@
                       <td>{{stud.name}}</td>
                       <td>{{stud.roll}}</td>
                       <td>{{stud.city}}</td>
+                      <td>
+                            <form action="{% url 'delete-student' %}" method="POST">
+                                {% csrf_token %}    
+                                <input type="hidden" name="id" value={{stud.id}}>
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                            </form>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
