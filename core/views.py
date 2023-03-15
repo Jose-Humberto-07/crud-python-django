@@ -34,4 +34,17 @@ class Delete_Student(View):
         studata = Student.objects.get(id = id)
         studata.delete()
         return redirect('/')
+    
+class EditStudent(View):
+    def get(self, request, id):
+        stu = Student.objects.get(id=id)
+        fm = AddStudentForm(instance=stu)
+        return render(request, 'core/edit-student.html', {'form':fm})
+
+    def post(self, request, id):
+        stu = Student.objects.get(id=id)
+        fm = AddStudentForm(request.POST, instance=stu)
+        if fm.is_valid():
+            fm.save()
+            return redirect('/')
         
